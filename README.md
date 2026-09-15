@@ -1,16 +1,94 @@
-# React + Vite
+# Lost & Found Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web-based Lost & Found Application developed for college/institution use. The application allows users to register and log in, report lost or found items, search and filter reported items, and view their own reports.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* User Registration and Login
+* Secure password storage using BCrypt
+* Report Lost Items
+* Report Found Items
+* Category and Contact details
+* Search and filter items
+* My Reports section
+* Lost/Found status
+* Date and location details
+* Chatbot assistance
+* Responsive and user-friendly interface
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
 
-## Expanding the ESLint configuration
+* React.js
+* JavaScript
+* HTML
+* CSS
+* Vite
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Backend
+
+* Java
+* Spring Boot
+* Spring Data JPA
+* Spring Security
+
+### Database
+
+* MySQL
+
+## Project Structure
+
+```text
+LOSTFOUND
+├── frontend
+│   ├── src
+│   ├── public
+│   └── package.json
+│
+└── lostandfound
+    ├── src
+    │   └── main
+    │       └── java
+    └── pom.xml
+```
+
+## How It Works
+
+1. A user registers and logs into the application.
+2. The user can report a lost or found item.
+3. Item details such as name, category, description, location, date and contact are stored in the MySQL database.
+4. Users can browse, search and filter reported items.
+5. Logged-in users can view their submitted reports through the My Reports section.
+6. The chatbot provides basic assistance for navigating the Lost & Found application.
+
+## Security
+
+* Passwords are stored using BCrypt hashing.
+* Duplicate email registration is prevented.
+* Login credentials are verified against the stored BCrypt password.
+* REST API endpoints are configured using Spring Security.
+
+## Database
+
+The application uses MySQL with the database:
+
+`lost_and_found_db`
+
+The backend communicates with the database using Spring Data JPA.
+
+## Future Scope
+
+* Admin dashboard
+* College ID-based verification
+* Improved item matching
+* Image upload for lost and found items
+* Email or notification alerts
+* Stronger authentication and authorization
+
+## Author
+
+**Diksha**
+
+B.Tech Computer Science Engineering
+Bhopal, India
