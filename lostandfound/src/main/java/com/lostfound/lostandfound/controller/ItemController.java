@@ -1,7 +1,9 @@
+
 package com.lostfound.lostandfound.controller;
 
 import com.lostfound.lostandfound.model.Item;
 import com.lostfound.lostandfound.repository.ItemRepository;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,13 +26,16 @@ public class ItemController {
 
     @PostMapping
     public Item addItem(@RequestBody Item item) {
+
         System.out.println("REPORTED BY = " + item.getReportedBy());
         System.out.println("ITEM DATE = " + item.getItemDate());
 
         return itemRepository.save(item);
     }
+
     @GetMapping("/my-reports")
-public List<Item> getMyReports(@RequestParam String name) {
-    return itemRepository.findByReportedBy(name);
+    public List<Item> getMyReports(@RequestParam String name) {
+        return itemRepository.findByReportedByIgnoreCase(name);
+    }
 }
-}
+

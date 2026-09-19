@@ -7,6 +7,7 @@ import Register from './Register';
 import Login from './Login';
 import Chatbot from './Chatbot';
 import MyReports from './MyReports';
+import ForgotPassword from './ForgotPassword';
 
 function App() {
   const loggedInUser = localStorage.getItem('loggedInUser');
@@ -16,7 +17,7 @@ function App() {
   if (loggedInUser) {
     try {
       const user = JSON.parse(loggedInUser);
-      userName = user.name;
+     userName = user.user?.name || '';
     } catch (error) {
       userName = '';
     }
@@ -47,8 +48,10 @@ function App() {
     }
   } else if (window.location.pathname === '/register') {
     page = <Register />;
-  } else if (window.location.pathname === '/login') {
+    } else if (window.location.pathname === '/login') {
     page = <Login />;
+  } else if (window.location.pathname === '/forgot-password') {
+    page = <ForgotPassword />;
   } else {
     page = (
       <div className="app">
@@ -85,6 +88,7 @@ function App() {
                 <button
                   onClick={() => {
                     localStorage.removeItem('loggedInUser');
+                    localStorage.removeItem('token');
                     window.location.href = '/';
                   }}
                 >
@@ -171,3 +175,4 @@ function App() {
 }
 
 export default App;
+

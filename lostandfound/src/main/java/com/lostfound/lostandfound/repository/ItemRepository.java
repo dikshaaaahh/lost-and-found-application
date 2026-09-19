@@ -1,4 +1,3 @@
-
 package com.lostfound.lostandfound.repository;
 
 import com.lostfound.lostandfound.model.Item;
@@ -8,6 +7,6 @@ import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    List<Item> findByReportedBy(String reportedBy);
+    List<Item> findByReportedByIgnoreCase(String reportedBy);
 
 }

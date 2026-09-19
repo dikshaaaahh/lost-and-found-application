@@ -2,10 +2,16 @@ import { useEffect, useState } from 'react';
 import './Items.css';
 
 function MyReports() {
+
+
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  const loggedInData = JSON.parse(
+  localStorage.getItem('loggedInUser')
+);
+
+const loggedInUser = loggedInData?.user;
 
   useEffect(() => {
     if (!loggedInUser?.name) {
@@ -13,12 +19,23 @@ function MyReports() {
       return;
     }
 
+    
+
+    const token = localStorage.getItem('token');
+
     fetch(
       `http://localhost:8080/api/items/my-reports?name=${encodeURIComponent(
         loggedInUser.name
-      )}`
+      )}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     )
       .then((response) => {
+        
+
         if (!response.ok) {
           throw new Error('Failed to fetch reports');
         }
@@ -26,12 +43,12 @@ function MyReports() {
         return response.json();
       })
       .then((data) => {
-        console.log('MY REPORTS:', data);
+       
         setReports(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.error('ERROR:', error);
+        
         setLoading(false);
       });
   }, [loggedInUser?.name]);
@@ -52,7 +69,6 @@ function MyReports() {
 
       <div className="items-header">
         <h1>My Reports</h1>
-
         <p>
           View all the lost and found items you have reported.
         </p>
@@ -91,7 +107,6 @@ function MyReports() {
 
                 <div className="detail-box location-box">
                   <span>📍</span>
-
                   <div>
                     <strong>Location</strong>
                     <p>
@@ -102,7 +117,6 @@ function MyReports() {
 
                 <div className="detail-box">
                   <span>📅</span>
-
                   <div>
                     <strong>Date</strong>
                     <p>
@@ -112,8 +126,27 @@ function MyReports() {
                 </div>
 
                 <div className="detail-box">
-                  <span>👤</span>
+                  <span>🏷️</span>
+                  <div>
+                    <strong>Category</strong>
+                    <p>
+                      {item.category || 'Category not available'}
+                    </p>
+                  </div>
+                </div>
 
+                <div className="detail-box">
+                  <span>📞</span>
+                  <div>
+                    <strong>Contact</strong>
+                    <p>
+                      {item.contact || 'Contact not available'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="detail-box">
+                  <span>👤</span>
                   <div>
                     <strong>Reported By</strong>
                     <p>
@@ -123,16 +156,13 @@ function MyReports() {
                 </div>
 
               </div>
-
             </div>
           ))
         )}
 
       </div>
-
     </div>
   );
 }
 
 export default MyReports;
-

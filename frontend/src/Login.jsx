@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import './Auth.css';
 
-  function Login() {
-  console.log("🔥 NEW LOGIN FILE IS RUNNING");
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -25,15 +24,37 @@ import './Auth.css';
         }
       );
 
-      const data = await response.text();
+      const data = await response.json();
+
+      console.log('LOGIN RESPONSE:', data);
 
       if (response.ok) {
-        localStorage.setItem('loggedInUser', data);
+
+        // Store JWT token
+        localStorage.setItem('token', data.token);
+
+        // Store complete login information
+        localStorage.setItem(
+          'loggedInUser',
+          JSON.stringify(data)
+        );
+
+        console.log(
+          'TOKEN SAVED:',
+          localStorage.getItem('token')
+        );
+
+        console.log(
+          'USER SAVED:',
+          localStorage.getItem('loggedInUser')
+        );
+
         setMessage('Login successful! 🎉');
 
         setTimeout(() => {
           window.location.href = '/';
         }, 500);
+
       } else {
         setMessage(data);
       }
